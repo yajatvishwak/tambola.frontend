@@ -13,7 +13,7 @@ function Signup({ props, navigation }) {
   const [passText, setpassText] = useState("");
 
   const handlePress = () => {
-    fetch("http://192.168.43.1:3000/auth", {
+    fetch("http://172.105.55.249:3000/auth", {
       method: "POST",
       headers: {
         Accept: "application/json",

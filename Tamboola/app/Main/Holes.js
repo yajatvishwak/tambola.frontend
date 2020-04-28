@@ -15,7 +15,7 @@ function Holes(props) {
   return (
     <TouchableOpacity
       style={[Punched ? styles.punched : styles.container, props.style]}
-      onPress={onpresshandler}
+      onPress={props.enabled ? onpresshandler : () => {}}
     >
       <Text
         style={props.single == 1 ? styles.singlenumber : styles.loremIpsum1}

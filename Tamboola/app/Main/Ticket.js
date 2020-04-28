@@ -46,6 +46,7 @@ function Ticket(props) {
         <Holes
           value={k}
           punched={false}
+          enabled={true}
           single={k >= 10 ? 0 : 1}
           style={styles.holes}
           updateTicPush={handleTicketPush}
