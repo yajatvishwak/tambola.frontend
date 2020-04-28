@@ -1,30 +1,17 @@
 import React, { Component, useState } from "react";
-import { StyleSheet, View, Text, TouchableOpacity, Modal } from "react-native";
+import {
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  TouchableOpacity,
+  Modal,
+} from "react-native";
 import Ticket from "./Ticket";
 var axios = require("axios");
-//import Pusher from "pusher-js/react-native";
 
 import { useNavigation } from "@react-navigation/native";
 import Done from "./Done";
-
-// const uniqueRandomRange = require("unique-random-range");
-// let rand = uniqueRandomRange(1, 89);
-// let ticketArr1 = [];
-// let ticketArr2 = [];
-// let ticketArr3 = [];
-// for (var i = 0; i < 5; i++) {
-//   ticketArr1.push(rand());
-//   ticketArr2.push(rand());
-//   ticketArr3.push(rand());
-// }
-
-//Pusher.logToConsole = true;
-//var pusher = new Pusher("fdb75fe73c74aba30121", {
-//   cluster: "ap2",
-//   forceTLS: true,
-// });
-
-// /var channel = pusher.subscribe("my-channel");
 
 let ws = new WebSocket("ws://172.105.55.249:2222");
 ws.onopen = function () {
@@ -43,7 +30,7 @@ function Main({ props, route }) {
     setTickets(data);
     console.log(Tickets);
   };
-  //check aif game is over
+  //check if game is over
   if (gameOver) {
     fetch("http://172.105.55.249:3000/winner")
       .then((response) => response.json())
@@ -59,21 +46,7 @@ function Main({ props, route }) {
   var { id } = route.params;
   var { ticketArr } = route.params;
 
-  // channel.bind("my-event", function (data) {
-  //   setNumber(data.message);
-  // });
-
-  // // announce winner -- WS implementation pending
-  // channel.bind("win", function (data) {
-  //   alert(JSON.stringify(data));
-  //   if (data.gameOver) {
-  //     setgameOver(true);
-  //   }
-  // });
-
   ws.onmessage = function (ev) {
-    // /let _data = JSON.parse(ev.data);
-    //console.log(ev);
     var json = JSON.parse(ev.data);
     if (json.channel == "number") {
       setNumber(json.number);
@@ -83,8 +56,6 @@ function Main({ props, route }) {
         setgameOver(true);
       }
     }
-    //setNumber(ev.data);
-    //alert(ev);
   };
 
   const handleCalls = (type) => {
@@ -143,44 +114,45 @@ function Main({ props, route }) {
           <Text style={styles.modal}>View Winners</Text>
         </TouchableOpacity>
       </View>
+      <ScrollView style={{ zIndex: -99 }}>
+        <Text style={styles.currentNumberIs}>Current Number is</Text>
+        <Text style={styles.loremIpsum}>{Number}</Text>
+        <Text style={styles.yourTicket}>Your Ticket</Text>
+        <Ticket
+          updateTicket={handleTic}
+          ticket={ticketArr}
+          style={styles.ticket}
+        ></Ticket>
 
-      <Text style={styles.currentNumberIs}>Current Number is</Text>
-      <Text style={styles.loremIpsum}>{Number}</Text>
-      <Text style={styles.yourTicket}>Your Ticket</Text>
-      <Ticket
-        updateTicket={handleTic}
-        ticket={ticketArr}
-        style={styles.ticket}
-      ></Ticket>
-
-      <View style={styles.button3Row}>
-        <TouchableOpacity
-          style={styles.button3}
-          onPress={() => handleCalls("FR")}
-        >
-          <Text style={styles.firstRow}>First Row</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => handleCalls("SR")}
-          style={styles.button2}
-        >
-          <Text style={styles.secondRow}>Second Row</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.button4Row}>
-        <TouchableOpacity
-          style={styles.button4}
-          onPress={() => handleCalls("TR")}
-        >
-          <Text style={styles.thirdRow}>Third Row</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button5}
-          onPress={() => handleCalls("FH")}
-        >
-          <Text style={styles.fullHouse}>Full House</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.button3Row}>
+          <TouchableOpacity
+            style={styles.button3}
+            onPress={() => handleCalls("FR")}
+          >
+            <Text style={styles.firstRow}>First Row</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleCalls("SR")}
+            style={styles.button2}
+          >
+            <Text style={styles.secondRow}>Second Row</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.button4Row}>
+          <TouchableOpacity
+            style={styles.button4}
+            onPress={() => handleCalls("TR")}
+          >
+            <Text style={styles.thirdRow}>Third Row</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button5}
+            onPress={() => handleCalls("FH")}
+          >
+            <Text style={styles.fullHouse}>Full House</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -304,7 +276,6 @@ const styles = StyleSheet.create({
     height: 40,
     flexDirection: "row",
     marginTop: 39,
-
     alignSelf: "center",
   },
   ticket: {
