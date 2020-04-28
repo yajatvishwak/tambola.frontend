@@ -1,9 +1,6 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Holes from "./Holes";
-const uniqueRandomRange = require("unique-random-range");
-
-let rand = uniqueRandomRange(1, 99);
 
 function removeItemAll(arr, value) {
   var i = 0;

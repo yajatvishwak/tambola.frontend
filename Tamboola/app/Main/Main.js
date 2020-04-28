@@ -1,21 +1,22 @@
 import React, { Component, useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Modal } from "react-native";
 import Ticket from "./Ticket";
+var axios = require("axios");
 //import Pusher from "pusher-js/react-native";
 
 import { useNavigation } from "@react-navigation/native";
 import Done from "./Done";
 
-const uniqueRandomRange = require("unique-random-range");
-let rand = uniqueRandomRange(1, 89);
-let ticketArr1 = [];
-let ticketArr2 = [];
-let ticketArr3 = [];
-for (var i = 0; i < 5; i++) {
-  ticketArr1.push(rand());
-  ticketArr2.push(rand());
-  ticketArr3.push(rand());
-}
+// const uniqueRandomRange = require("unique-random-range");
+// let rand = uniqueRandomRange(1, 89);
+// let ticketArr1 = [];
+// let ticketArr2 = [];
+// let ticketArr3 = [];
+// for (var i = 0; i < 5; i++) {
+//   ticketArr1.push(rand());
+//   ticketArr2.push(rand());
+//   ticketArr3.push(rand());
+// }
 
 //Pusher.logToConsole = true;
 //var pusher = new Pusher("fdb75fe73c74aba30121", {
@@ -55,8 +56,8 @@ function Main({ props, route }) {
       });
   }
 
-  const ticketArr = [ticketArr1, ticketArr2, ticketArr3];
   var { id } = route.params;
+  var { ticketArr } = route.params;
 
   // channel.bind("my-event", function (data) {
   //   setNumber(data.message);
@@ -87,7 +88,6 @@ function Main({ props, route }) {
   };
 
   const handleCalls = (type) => {
-    var axios = require("axios");
     axios({
       method: "post",
       url: "http://172.105.55.249:3000",

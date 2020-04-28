@@ -13,6 +13,8 @@ function Signup({ props, navigation }) {
   const [passText, setpassText] = useState("");
 
   const handlePress = () => {
+    var isauth = false;
+
     fetch("http://172.105.55.249:3000/auth", {
       method: "POST",
       headers: {
@@ -27,9 +29,9 @@ function Signup({ props, navigation }) {
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
-
-        if (json == true) {
-          navigation.replace("Main", { id: nameText });
+        if (json.isauth == true) {
+          navigation.replace("Main", { id: nameText, ticketArr: json.tick });
+          isauth == true;
         } else {
           alert("Invalid Credentials");
         }
