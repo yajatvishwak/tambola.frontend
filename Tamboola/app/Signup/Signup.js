@@ -6,11 +6,15 @@ import {
   TextInput,
   TouchableOpacity,
   Text,
+  Modal,
+  Image,
 } from "react-native";
+import Howto from "../Main/Howto";
 
 function Signup({ props, navigation }) {
   const [nameText, setnameText] = useState("");
   const [passText, setpassText] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handlePress = () => {
     var isauth = false;
@@ -42,6 +46,24 @@ function Signup({ props, navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar hidden={true}></StatusBar>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <Howto />
+      </Modal>
+      <Image
+        style={{
+          width: 200,
+          height: 200,
+          alignSelf: "center",
+          marginTop: 180,
+          marginBottom: -300,
+        }}
+        source={require("./my-icon.png")}
+      />
 
       <TextInput
         placeholder="user id"
@@ -56,6 +78,14 @@ function Signup({ props, navigation }) {
       ></TextInput>
       <TouchableOpacity style={styles.button} onPress={handlePress}>
         <Text style={styles.play}>play!</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button1}
+        onPress={() => {
+          setModalVisible(true);
+        }}
+      >
+        <Text style={styles.play1}>How to Participate?</Text>
       </TouchableOpacity>
     </View>
   );
@@ -99,8 +129,21 @@ const styles = StyleSheet.create({
     marginTop: 100,
     alignSelf: "center",
   },
+  button1: {
+    width: 300,
+    height: 40,
+    backgroundColor: "black",
+    borderRadius: 10,
+    marginTop: 40,
+    alignSelf: "center",
+  },
   play: {
     color: "#121212",
+    textAlign: "center",
+    marginTop: 10,
+  },
+  play1: {
+    color: "#fff",
     textAlign: "center",
     marginTop: 10,
   },

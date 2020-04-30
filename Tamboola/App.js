@@ -5,6 +5,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Signup from "./app/Signup/Signup";
 import Main from "./app/Main/Main";
 
+import Leaderboard from "./app/Main/Leaderboard";
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -17,6 +19,7 @@ export default function App() {
       >
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Main" component={Main} />
+        <Stack.Screen name="Leader" component={Leaderboard} />
       </Stack.Navigator>
     </NavigationContainer>
   );

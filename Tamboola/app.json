@@ -1,8 +1,12 @@
 {
   "expo": {
-    "name": "Tambolav2",
+    "name": "Tambola",
     "slug": "Tamboola",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,15 +18,18 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.yajatvishwak.tambola",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "package": "com.yajatvishwak.tambola",
       "versionCode": 1
     },
-
     "sdkVersion": "37.0.0",
     "description": ""
   }

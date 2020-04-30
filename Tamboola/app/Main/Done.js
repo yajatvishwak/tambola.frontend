@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import Holes from "./Holes";
+import BHoles from "./BHoles";
 import { ScrollView, TouchableOpacity, Text } from "react-native";
 
 const Done = (props) => {
@@ -20,13 +20,22 @@ const Done = (props) => {
       });
   };
   var p = [];
-  for (var i = 0; i < alldone.length; i++) {
+  // for (var i = 0; i < alldone.length; i++) {
+  //   p.push(
+  //     <Holes
+  //       value={alldone[i]}
+  //       single={alldone[i] >= 10 ? 0 : 1}
+  //       style={styles.holes}
+  //     ></Holes>
+  //   );
+  // }
+  for (var i = 1; i <= 89; i++) {
     p.push(
-      <Holes
-        value={alldone[i]}
-        single={alldone[i] >= 10 ? 0 : 1}
-        style={styles.holes}
-      ></Holes>
+      <BHoles
+        value={i}
+        single={i >= 10 ? 0 : 1}
+        style={alldone.indexOf(i) == -1 ? styles.holes : styles.holesDone}
+      ></BHoles>
     );
   }
 
@@ -59,7 +68,8 @@ const styles = StyleSheet.create({
   },
   scroll: {
     alignSelf: "center",
-    margin: 25,
+    marginLeft: 25,
+    padding: 2,
     flexDirection: "row",
     flexWrap: "wrap",
   },
@@ -69,16 +79,24 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   scrollArea: {
-    height: 658,
+    height: 500,
     backgroundColor: "rgba(230, 230, 230,1)",
   },
 
   holes: {
-    width: 55,
-    height: 55,
+    width: 40,
+    height: 40,
     marginRight: 10,
     margin: 20,
     alignSelf: "flex-start",
+  },
+  holesDone: {
+    width: 40,
+    height: 40,
+    marginRight: 10,
+    margin: 20,
+    alignSelf: "flex-start",
+    backgroundColor: "#1169d4",
   },
   holesRow: {
     height: 55,

@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
-function Holes(props) {
+function BHoles(props) {
   const [Punched, setPunched] = useState(false);
 
   var onpresshandler = () => {
@@ -35,17 +35,18 @@ const styles = StyleSheet.create({
     borderStyle: "dashed",
   },
   singlenumber: {
-    color: "#121212",
-    fontSize: 20,
-    marginTop: 10,
-    marginLeft: 19,
+    color: "#fff",
+    fontSize: 15,
+    marginTop: 7,
+
+    alignSelf: "center",
   },
 
   loremIpsum1: {
-    color: "#121212",
-    fontSize: 20,
-    marginTop: 10,
-    marginLeft: 13,
+    color: "#fff",
+    fontSize: 15,
+    marginTop: 7,
+    alignSelf: "center",
   },
   punched: {
     backgroundColor: "rgba(176,176,176,1)",
@@ -55,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Holes;
+export default BHoles;

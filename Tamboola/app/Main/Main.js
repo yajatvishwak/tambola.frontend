@@ -10,6 +10,8 @@ import {
 import Ticket from "./Ticket";
 var axios = require("axios");
 
+import * as Speech from "expo-speech";
+
 import { useNavigation } from "@react-navigation/native";
 import Done from "./Done";
 
@@ -30,13 +32,17 @@ function Main({ props, route }) {
     setTickets(data);
     console.log(Tickets);
   };
+  const speak = (thingToSay) => {
+    Speech.speak(thingToSay);
+  };
+
   //check if game is over
   if (gameOver) {
     fetch("http://172.105.55.249:3000/winner")
       .then((response) => response.json())
       .then((json) => {
         alert(json);
-        navigation.navigate("Signup");
+        navigation.replace("Leader");
       })
       .catch((error) => {
         console.error(error);
@@ -49,6 +55,7 @@ function Main({ props, route }) {
   ws.onmessage = function (ev) {
     var json = JSON.parse(ev.data);
     if (json.channel == "number") {
+      speak("The Number is " + json.number);
       setNumber(json.number);
     } else if (json.channel == "win") {
       alert(json.message);
