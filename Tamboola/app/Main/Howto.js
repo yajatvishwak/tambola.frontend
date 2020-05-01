@@ -7,23 +7,18 @@ function Howto(props) {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.scrollArea}>
+        <MaterialCardWithImageAndTitle1
+          style={styles.materialCardWithImageAndTitle}
+          value={"Yajat Vishwakarma"}
+          info={"App developed by - instagram(@thisisyajatvishwakk)"}
+        ></MaterialCardWithImageAndTitle1>
         <MaterialCardWithoutImage
           style={styles.materialCardWithoutImage}
         ></MaterialCardWithoutImage>
         <MaterialCardWithImageAndTitle1
           style={styles.materialCardWithImageAndTitle1}
-          value={9481292936}
-          info={"Eshan Parekh - Gpay"}
-        ></MaterialCardWithImageAndTitle1>
-        <MaterialCardWithImageAndTitle1
-          style={styles.materialCardWithImageAndTitle1}
-          value={"amanparekh22-1@okaxis"}
-          info={"Eshan Parekh - UPI"}
-        ></MaterialCardWithImageAndTitle1>
-        <MaterialCardWithImageAndTitle1
-          style={styles.materialCardWithImageAndTitle1}
-          value={"Yajat Vishwakarma"}
-          info={"appdev - instagram(@thisisyajatvishwakk)"}
+          value={"9481292936 - amanparekh22-1@okaxis "}
+          info={"Eshan Parekh - Gpay and UPI id"}
         ></MaterialCardWithImageAndTitle1>
       </View>
     </ScrollView>
@@ -39,7 +34,7 @@ const styles = StyleSheet.create({
   materialCardWithoutImage: {
     width: 359,
     height: 400,
-    marginTop: 90,
+    marginTop: 31,
     marginLeft: 1,
     alignSelf: "center",
   },
@@ -51,9 +46,9 @@ const styles = StyleSheet.create({
   },
   materialCardWithImageAndTitle: {
     width: 359,
-    height: 166,
+    height: 150,
     marginTop: 31,
-    marginLeft: 1,
+    marginBottom: 15,
     alignSelf: "center",
   },
 });

@@ -2,17 +2,20 @@ import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Holes from "./Holes";
 
-function removeItemAll(arr, value) {
-  var i = 0;
-  while (i < arr.length) {
-    if (arr[i] === value) {
+var removeByAttr = function (arr, attr, value) {
+  var i = arr.length;
+  while (i--) {
+    if (
+      arr[i] &&
+      arr[i].hasOwnProperty(attr) &&
+      arguments.length > 2 &&
+      arr[i][attr] === value
+    ) {
       arr.splice(i, 1);
-    } else {
-      ++i;
     }
   }
   return arr;
-}
+};
 function Ticket(props) {
   var p = [];
   var p2 = [];
@@ -24,14 +27,25 @@ function Ticket(props) {
   var arp2 = ticketarr[1];
   var arp3 = ticketarr[2];
 
+  const whichRow = (value) => {
+    if (arp.indexOf(value) != -1) {
+      return "FR";
+    } else if (arp2.indexOf(value) != -1) {
+      return "SR";
+    } else if (arp3.indexOf(value) != -1) {
+      return "TR";
+    }
+  };
+
   var handleTicketPush = (value) => {
     var tic = Ticket;
-    tic.push(value);
+    var row = whichRow(value);
+    tic.push({ value: value, row: row });
     props.updateTicket(tic);
   };
   var handleTicketRem = (value) => {
     var tic = Ticket;
-    removeItemAll(tic, value);
+    removeByAttr(tic, "value", value);
     props.updateTicket(tic);
   };
 

@@ -5,10 +5,9 @@ import WinnerCard from "./components/WinnerCard";
 
 function Leaderboard(props) {
   const [Results, setResults] = useState({});
-  fetch("http://172.105.55.249:3000/winnersobj")
+  fetch("http://192.168.43.1:3000/winnersobj")
     .then((response) => response.json())
     .then((json) => {
-      console.log(json.fh);
       setResults(json);
     })
     .catch((error) => {

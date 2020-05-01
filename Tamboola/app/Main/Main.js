@@ -14,17 +14,18 @@ import * as Speech from "expo-speech";
 
 import { useNavigation } from "@react-navigation/native";
 import Done from "./Done";
+import Leaderboard from "./Leaderboard";
 
-let ws = new WebSocket("ws://172.105.55.249:2222");
+let ws = new WebSocket("ws://192.168.43.1:2222");
 ws.onopen = function () {
   console.log("Connected to WS");
-  alert("Connected to WS");
+  alert("Welcome to Tambola! Login to start your game");
 };
 
 function Main({ props, route }) {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
-
+  const [modalWinnerVisible, setmodalWinnerVisible] = useState(false);
   const [Number, setNumber] = useState(0);
   const [gameOver, setgameOver] = useState(false);
   const [Tickets, setTickets] = useState([]);
@@ -38,15 +39,7 @@ function Main({ props, route }) {
 
   //check if game is over
   if (gameOver) {
-    fetch("http://172.105.55.249:3000/winner")
-      .then((response) => response.json())
-      .then((json) => {
-        alert(json);
-        navigation.replace("Leader");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    navigation.replace("Leader");
   }
 
   var { id } = route.params;
@@ -59,6 +52,7 @@ function Main({ props, route }) {
       setNumber(json.number);
     } else if (json.channel == "win") {
       alert(json.message);
+      console.log(json);
       if (json.gameOver) {
         setgameOver(true);
       }
@@ -68,7 +62,7 @@ function Main({ props, route }) {
   const handleCalls = (type) => {
     axios({
       method: "post",
-      url: "http://172.105.55.249:3000",
+      url: "http://192.168.43.1:3000",
       data: {
         name: id,
         ticket: Tickets,
@@ -93,6 +87,14 @@ function Main({ props, route }) {
       >
         <Done />
       </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalWinnerVisible}
+        onRequestClose={() => setmodalWinnerVisible(false)}
+      >
+        <Leaderboard />
+      </Modal>
       <View style={styles.viewRows}>
         <TouchableOpacity
           style={styles.openButton}
@@ -105,17 +107,7 @@ function Main({ props, route }) {
         <TouchableOpacity
           style={styles.openButton}
           onPress={() => {
-            var axios = require("axios");
-            axios({
-              method: "get",
-              url: "http://172.105.55.249:3000/winner",
-            })
-              .then((res) => {
-                alert(res.data);
-              })
-              .catch((err) => {
-                alert("There's an error:  " + err);
-              });
+            setmodalWinnerVisible(true);
           }}
         >
           <Text style={styles.modal}>View Winners</Text>

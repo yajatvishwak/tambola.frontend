@@ -19,7 +19,7 @@ function Signup({ props, navigation }) {
   const handlePress = () => {
     var isauth = false;
 
-    fetch("http://172.105.55.249:3000/auth", {
+    fetch("http://192.168.43.1:3000/auth", {
       method: "POST",
       headers: {
         Accept: "application/json",
