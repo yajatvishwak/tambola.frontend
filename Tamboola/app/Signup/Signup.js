@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import {
   StyleSheet,
-  View,
+  ScrollView,
   StatusBar,
   TextInput,
   TouchableOpacity,
@@ -10,16 +10,17 @@ import {
   Image,
 } from "react-native";
 import Howto from "../Main/Howto";
+import env from "../../variable";
 
 function Signup({ props, navigation }) {
   const [nameText, setnameText] = useState("");
   const [passText, setpassText] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
-
+  console.log(env);
   const handlePress = () => {
     var isauth = false;
 
-    fetch("http://192.168.43.1:3000/auth", {
+    fetch(env.exp.apiUrl + "/auth", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -44,7 +45,7 @@ function Signup({ props, navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <StatusBar hidden={true}></StatusBar>
       <Modal
         animationType="slide"
@@ -87,7 +88,7 @@ function Signup({ props, navigation }) {
       >
         <Text style={styles.play1}>How to Participate?</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }
 

@@ -2,10 +2,11 @@ import React, { Component, useState } from "react";
 import { StyleSheet, View, ScrollView, Text } from "react-native";
 
 import WinnerCard from "./components/WinnerCard";
+import env from "../../variable";
 
 function Leaderboard(props) {
   const [Results, setResults] = useState({});
-  fetch("http://192.168.43.1:3000/winnersobj")
+  fetch(env.exp.apiUrl + "/winnersobj")
     .then((response) => response.json())
     .then((json) => {
       setResults(json);

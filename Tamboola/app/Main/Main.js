@@ -15,12 +15,27 @@ import * as Speech from "expo-speech";
 import { useNavigation } from "@react-navigation/native";
 import Done from "./Done";
 import Leaderboard from "./Leaderboard";
+import env from "../../variable";
+import ReconnectingWebSocket from "reconnecting-websocket";
 
-let ws = new WebSocket("ws://192.168.43.1:2222");
-ws.onopen = function () {
-  console.log("Connected to WS");
-  alert("Welcome to Tambola! Login to start your game");
+// --Reconnecting WEBSOCKET--
+let ws = new ReconnectingWebSocket(env.ws.apiUrl, {
+  debug: true,
+  reconnectInterval: 3000,
+});
+
+const connect = () => {
+  ws.onopen = function () {
+    console.log("Connected to WS");
+  };
 };
+connect();
+
+// ws.onerror = function (err) {
+//   console.error("Socket encountered error: ", err.message, "Closing socket");
+//   ws.close();
+// };
+// --WEBSOCKET--
 
 function Main({ props, route }) {
   const navigation = useNavigation();
@@ -62,7 +77,7 @@ function Main({ props, route }) {
   const handleCalls = (type) => {
     axios({
       method: "post",
-      url: "http://192.168.43.1:3000",
+      url: env.exp.apiUrl,
       data: {
         name: id,
         ticket: Tickets,
