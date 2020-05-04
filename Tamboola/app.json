@@ -22,7 +22,7 @@
     },
     "android": {
       "package": "com.yajatvishwak.tambola",
-      "versionCode": 4
+      "versionCode": 5.0
     },
     "sdkVersion": "37.0.0",
     "description": ""
