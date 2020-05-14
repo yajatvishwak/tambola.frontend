@@ -1,47 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import BHoles from "./BHoles";
 import { ScrollView, TouchableOpacity, Text } from "react-native";
 
 const Done = (props) => {
-  const [alldone, setalldone] = useState([]);
-  const handlePress = () => {
-    var axios = require("axios");
-    axios({
-      method: "get",
-      url: "http://172.105.55.249:3000/done",
-    })
-      .then((res) => {
-        //console.log(res);
-        setalldone(res.data);
-      })
-      .catch((err) => {
-        alert("There's an error:  " + err);
-      });
-  };
+  var done = props.alldone;
+  console.log(done);
   var p = [];
-  // for (var i = 0; i < alldone.length; i++) {
-  //   p.push(
-  //     <Holes
-  //       value={alldone[i]}
-  //       single={alldone[i] >= 10 ? 0 : 1}
-  //       style={styles.holes}
-  //     ></Holes>
-  //   );
-  // }
-  for (var i = 1; i <= 89; i++) {
+
+  for (var i = 1; i <= 90; i++) {
     p.push(
       <BHoles
         value={i}
         single={i >= 10 ? 0 : 1}
-        style={alldone.indexOf(i) == -1 ? styles.holes : styles.holesDone}
+        style={done.indexOf(i) == -1 ? styles.holes : styles.holesDone}
       ></BHoles>
     );
   }
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={handlePress}>
+      <TouchableOpacity style={styles.button} onPress={props.refresh}>
         <Text style={styles.refresh}>refresh</Text>
       </TouchableOpacity>
       <View style={{ flex: 1, flexDirection: "row" }}>
@@ -61,14 +40,13 @@ const styles = StyleSheet.create({
     width: 200,
     height: 40,
     backgroundColor: "rgba(230, 230, 230,1)",
-    borderRadius: 100,
+    borderRadius: 50,
     marginBottom: 10,
     marginTop: 70,
     alignSelf: "center",
   },
   scroll: {
     alignSelf: "center",
-    marginLeft: 25,
     padding: 2,
     flexDirection: "row",
     flexWrap: "wrap",
@@ -86,25 +64,17 @@ const styles = StyleSheet.create({
   holes: {
     width: 40,
     height: 40,
-    marginRight: 10,
-    margin: 20,
+    margin: 2,
+    marginTop: 20,
     alignSelf: "flex-start",
   },
   holesDone: {
     width: 40,
     height: 40,
-    marginRight: 10,
-    margin: 20,
+    margin: 2,
+    marginTop: 20,
     alignSelf: "flex-start",
     backgroundColor: "#1169d4",
-  },
-  holesRow: {
-    height: 55,
-    flexWrap: "wrap",
-    flexDirection: "row",
-    marginTop: 14,
-    marginLeft: 10,
-    marginRight: 10,
   },
 });
 

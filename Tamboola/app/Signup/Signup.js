@@ -16,7 +16,7 @@ function Signup({ props, navigation }) {
   const [nameText, setnameText] = useState("");
   const [passText, setpassText] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
-  console.log(env);
+  //console.log(env);
   const handlePress = () => {
     var isauth = false;
 

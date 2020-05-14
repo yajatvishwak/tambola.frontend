@@ -44,6 +44,7 @@ function Main({ props, route }) {
   const [Number, setNumber] = useState(0);
   const [gameOver, setgameOver] = useState(false);
   const [Tickets, setTickets] = useState([]);
+  const [AllDone, setAllDone] = useState([]);
   const handleTic = (data) => {
     setTickets(data);
     console.log(Tickets);
@@ -91,6 +92,19 @@ function Main({ props, route }) {
         alert("There's an error:  " + err);
       });
   };
+  function handleRefresh() {
+    axios({
+      method: "get",
+      url: env.exp.apiUrl + "/done",
+    })
+      .then((res) => {
+        //console.log(res.data);
+        setAllDone(res.data);
+      })
+      .catch((err) => {
+        alert("There's an error:  " + err);
+      });
+  }
 
   return (
     <View style={styles.container}>
@@ -100,7 +114,7 @@ function Main({ props, route }) {
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}
       >
-        <Done />
+        <Done alldone={AllDone} refresh={handleRefresh} />
       </Modal>
       <Modal
         animationType="slide"
